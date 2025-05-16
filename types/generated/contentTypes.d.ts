@@ -433,6 +433,80 @@ export interface ApiCategoriaCategoria extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiPlataformaPlataforma extends Struct.CollectionTypeSchema {
+  collectionName: 'plataformas';
+  info: {
+    displayName: 'Plataforma';
+    pluralName: 'plataformas';
+    singularName: 'plataforma';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    fecha_lanzamiento: Schema.Attribute.Date;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::plataforma.plataforma'
+    > &
+      Schema.Attribute.Private;
+    nombre: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'nombre'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    videojuegos: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::videojuego.videojuego'
+    >;
+  };
+}
+
+export interface ApiVideojuegoVideojuego extends Struct.CollectionTypeSchema {
+  collectionName: 'videojuegos';
+  info: {
+    description: '';
+    displayName: 'Videojuego';
+    pluralName: 'videojuegos';
+    singularName: 'videojuego';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    cover: Schema.Attribute.Media<'images' | 'files'> &
+      Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    fecha_salida: Schema.Attribute.Date;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::videojuego.videojuego'
+    > &
+      Schema.Attribute.Private;
+    nombre: Schema.Attribute.String & Schema.Attribute.Required;
+    peso_gb: Schema.Attribute.Decimal;
+    plataformas: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::plataforma.plataforma'
+    >;
+    precio: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    sinopsis: Schema.Attribute.Blocks;
+    slug: Schema.Attribute.UID<'nombre'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -944,6 +1018,8 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::blog.blog': ApiBlogBlog;
       'api::categoria.categoria': ApiCategoriaCategoria;
+      'api::plataforma.plataforma': ApiPlataformaPlataforma;
+      'api::videojuego.videojuego': ApiVideojuegoVideojuego;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

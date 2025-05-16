@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "plataformas",
+  "info": {
+    "singularName": "plataforma",
+    "pluralName": "plataformas",
+    "displayName": "Plataforma"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "nombre": {
+      "type": "string",
+      "required": true
+    },
+    "fecha_lanzamiento": {
+      "type": "date"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "nombre"
+    },
+    "videojuegos": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::videojuego.videojuego",
+      "mappedBy": "plataformas"
+    }
+  }
+}

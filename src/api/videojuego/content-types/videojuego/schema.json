@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "videojuegos",
+  "info": {
+    "singularName": "videojuego",
+    "pluralName": "videojuegos",
+    "displayName": "Videojuego",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "nombre": {
+      "type": "string",
+      "required": true
+    },
+    "cover": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "precio": {
+      "type": "decimal",
+      "required": true
+    },
+    "fecha_salida": {
+      "type": "date"
+    },
+    "peso_gb": {
+      "type": "decimal"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "nombre"
+    },
+    "plataformas": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::plataforma.plataforma",
+      "inversedBy": "videojuegos"
+    },
+    "sinopsis": {
+      "type": "blocks"
+    }
+  }
+}
