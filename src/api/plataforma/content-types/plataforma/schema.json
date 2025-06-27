@@ -4,7 +4,8 @@
   "info": {
     "singularName": "plataforma",
     "pluralName": "plataformas",
-    "displayName": "Plataforma"
+    "displayName": "Plataforma",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -26,6 +27,15 @@
       "relation": "manyToMany",
       "target": "api::videojuego.videojuego",
       "mappedBy": "plataformas"
+    },
+    "imagen": {
+      "allowedTypes": [
+        "images",
+        "files"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
     }
   }
 }

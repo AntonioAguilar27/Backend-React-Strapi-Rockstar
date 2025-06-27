@@ -436,6 +436,7 @@ export interface ApiCategoriaCategoria extends Struct.CollectionTypeSchema {
 export interface ApiPlataformaPlataforma extends Struct.CollectionTypeSchema {
   collectionName: 'plataformas';
   info: {
+    description: '';
     displayName: 'Plataforma';
     pluralName: 'plataformas';
     singularName: 'plataforma';
@@ -448,6 +449,8 @@ export interface ApiPlataformaPlataforma extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     fecha_lanzamiento: Schema.Attribute.Date;
+    imagen: Schema.Attribute.Media<'images' | 'files'> &
+      Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -485,6 +488,7 @@ export interface ApiVideojuegoVideojuego extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     fecha_salida: Schema.Attribute.Date;
+    imagenes: Schema.Attribute.Media<'images' | 'files', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

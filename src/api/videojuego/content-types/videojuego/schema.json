@@ -46,6 +46,14 @@
     },
     "sinopsis": {
       "type": "blocks"
+    },
+    "imagenes": {
+      "allowedTypes": [
+        "images",
+        "files"
+      ],
+      "type": "media",
+      "multiple": true
     }
   }
 }
