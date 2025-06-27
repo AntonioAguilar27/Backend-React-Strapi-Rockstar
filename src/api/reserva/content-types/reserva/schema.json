@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "reservas",
+  "info": {
+    "singularName": "reserva",
+    "pluralName": "reservas",
+    "displayName": "reserva",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "fecha_inicio": {
+      "type": "date",
+      "required": true
+    },
+    "fecha_fin": {
+      "type": "date",
+      "required": true
+    },
+    "nombre_cliente": {
+      "type": "string",
+      "required": true
+    },
+    "email_cliente": {
+      "type": "email",
+      "required": true
+    },
+    "telefono": {
+      "type": "string",
+      "maxLength": 10,
+      "minLength": 10,
+      "required": true
+    },
+    "videojuego": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::videojuego.videojuego",
+      "inversedBy": "reservas"
+    }
+  }
+}

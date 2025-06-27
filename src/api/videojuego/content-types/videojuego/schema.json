@@ -48,12 +48,22 @@
       "type": "blocks"
     },
     "imagenes": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
+    },
+    "precio_renta_dia": {
+      "type": "decimal"
+    },
+    "reservas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::reserva.reserva",
+      "mappedBy": "videojuego"
     }
   }
 }

@@ -470,6 +470,48 @@ export interface ApiPlataformaPlataforma extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiReservaReserva extends Struct.CollectionTypeSchema {
+  collectionName: 'reservas';
+  info: {
+    description: '';
+    displayName: 'reserva';
+    pluralName: 'reservas';
+    singularName: 'reserva';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email_cliente: Schema.Attribute.Email & Schema.Attribute.Required;
+    fecha_fin: Schema.Attribute.Date & Schema.Attribute.Required;
+    fecha_inicio: Schema.Attribute.Date & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::reserva.reserva'
+    > &
+      Schema.Attribute.Private;
+    nombre_cliente: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    telefono: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 10;
+        minLength: 10;
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    videojuego: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::videojuego.videojuego'
+    >;
+  };
+}
+
 export interface ApiVideojuegoVideojuego extends Struct.CollectionTypeSchema {
   collectionName: 'videojuegos';
   info: {
@@ -502,7 +544,9 @@ export interface ApiVideojuegoVideojuego extends Struct.CollectionTypeSchema {
       'api::plataforma.plataforma'
     >;
     precio: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    precio_renta_dia: Schema.Attribute.Decimal;
     publishedAt: Schema.Attribute.DateTime;
+    reservas: Schema.Attribute.Relation<'oneToMany', 'api::reserva.reserva'>;
     sinopsis: Schema.Attribute.Blocks;
     slug: Schema.Attribute.UID<'nombre'>;
     updatedAt: Schema.Attribute.DateTime;
@@ -1023,6 +1067,7 @@ declare module '@strapi/strapi' {
       'api::blog.blog': ApiBlogBlog;
       'api::categoria.categoria': ApiCategoriaCategoria;
       'api::plataforma.plataforma': ApiPlataformaPlataforma;
+      'api::reserva.reserva': ApiReservaReserva;
       'api::videojuego.videojuego': ApiVideojuegoVideojuego;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
